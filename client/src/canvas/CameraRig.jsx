@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { useSnapshot } from 'valtio';
 import state from '../store';
 import { useFrame } from '@react-three/fiber';
-
+import { easing } from 'maath';
 const CameraRig = ({ children }) => {
   const group = useRef();
   const snap = useSnapshot(state);
@@ -11,7 +11,7 @@ const CameraRig = ({ children }) => {
     const isMobile=window.innerWidth<=600
     let targetPosition=[-0.4,0,2]
     if(snap.intro){
-        if(isBreakpoint) targetPosition=[0,0,2]
+        if(isBreakpoint) targetPosition=[0,0,2]//поставил 5
         if(isMobile) targetPosition=[0,0.2,2.5]
     }
     else{
@@ -23,7 +23,7 @@ const CameraRig = ({ children }) => {
     easing.dampE(
       group.current.rotation,
       [state.pointer.y / 10, -state.pointer.x / 5, 0],
-      0.5,
+      0.25,
       delta,
     );
   });
